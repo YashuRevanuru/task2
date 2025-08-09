@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Delish Dine - Restaurant Menu</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --bg: #ffffff;
+      --text: #333333;
+      --primary: #ff6347;
+      --card-bg: #f8f8f8;
+    }
+
+    body.dark {
+      --bg: #1a1a1a;
+      --text: #f5f5f5;
+      --card-bg: #333333;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Segoe UI", sans-serif;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      padding: 20px;
+      transition: all 0.3s ease;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    header h1 {
+      font-size: 2.5em;
+      color: var(--primary);
+    }
+
+    .toggle-btn {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background-color: var(--primary);
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 1em;
+    }
+
+    .menu-section {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    .menu-item {
+      background-color: var(--card-bg);
+      padding: 15px;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      transition: transform 0.2s;
+    }
+
+    .menu-item:hover {
+      transform: scale(1.03);
+    }
+
+    .menu-item h3 {
+      margin-bottom: 10px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .menu-item p {
+      font-size: 0.95em;
+    }
+
+    .contact-form {
+      margin-top: 50px;
+      padding: 20px;
+      background-color: var(--card-bg);
+      border-radius: 12px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .contact-form h2 {
+      margin-bottom: 15px;
+      text-align: center;
+      color: var(--primary);
+    }
+
+    .contact-form label {
+      display: block;
+      margin-top: 15px;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      background-color: #fff;
+    }
+
+    .contact-form button {
+      margin-top: 20px;
+      background-color: var(--primary);
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .error {
+      color: red;
+      font-size: 0.85em;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      font-size: 0.9em;
+    }
+
+    .icon {
+      color: var(--primary);
+    }
+  </style>
+</head>
+<body>
+
+  <button class="toggle-btn" onclick="toggleTheme()">
+    <i class="fas fa-moon"></i> Toggle Theme
+  </button>
+
+  <header>
+    <h1><i class="fas fa-utensils icon"></i> Delish Dine</h1>
+    <p>Welcome to our delightful restaurant! 🍽️</p>
+  </header>
+
+  <section class="menu-section">
+    <div class="menu-item">
+      <h3><span>🍕 Margherita Pizza</span> <span>₹299</span></h3>
+      <p>Classic pizza with fresh tomatoes, mozzarella, and basil.</p>
+    </div>
+    <div class="menu-item">
+      <h3><span>🍔 Cheeseburger</span> <span>₹249</span></h3>
+      <p>Grilled beef patty with melted cheese, lettuce, and tomato.</p>
+    </div>
+    <div class="menu-item">
+      <h3><span>🥗 Caesar Salad</span> <span>₹199</span></h3>
+      <p>Crispy lettuce with Caesar dressing, croutons, and cheese.</p>
+    </div>
+    <div class="menu-item">
+      <h3><span>🍝 Spaghetti Bolognese</span> <span>₹349</span></h3>
+      <p>Spaghetti in a rich meat sauce topped with parmesan.</p>
+    </div>
+    <div class="menu-item">
+      <h3><span>🍹 Mocktail Mix</span> <span>₹149</span></h3>
+      <p>Refreshing blend of tropical fruit juices and herbs.</p>
+    </div>
+    <div class="menu-item">
+      <h3><span>🍨 Chocolate Sundae</span> <span>₹179</span></h3>
+      <p>Vanilla ice cream topped with chocolate sauce and nuts.</p>
+    </div>
+  </section>
+
+  <!-- Contact Form Section -->
+  <section class="contact-form">
+    <h2>Contact Us</h2>
+    <form id="contactForm">
+      <label for="name">Name *</label>
+      <input type="text" id="name" name="name" />
+      <div class="error" id="nameError"></div>
+
+      <label for="email">Email *</label>
+      <input type="email" id="email" name="email" />
+      <div class="error" id="emailError"></div>
+
+      <label for="message">Message</label>
+      <textarea id="message" name="message" rows="4"></textarea>
+
+      <button type="submit">Submit</button>
+    </form>
+  </section>
+
+  <footer>
+    <p><i class="fas fa-phone icon"></i> Call us: 123-456-7890 | <i class="fas fa-map-marker-alt icon"></i> 123 Food Street, Delhi</p>
+  </footer>
+
+  <script>
+    function toggleTheme() {
+      document.body.classList.toggle('dark');
+      const btn = document.querySelector('.toggle-btn i');
+      btn.classList.toggle('fa-sun');
+      btn.classList.toggle('fa-moon');
+    }
+
+    // Form Validation Script
+    document.getElementById("contactForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      let valid = true;
+
+      // Clear previous errors
+      document.getElementById("nameError").textContent = "";
+      document.getElementById("emailError").textContent = "";
+
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
+
+      if (name === "") {
+        document.getElementById("nameError").textContent = "Name is required.";
+        valid = false;
+      }
+
+      const emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+      if (email === "") {
+        document.getElementById("emailError").textContent = "Email is required.";
+        valid = false;
+      } else if (!emailPattern.test(email)) {
+        document.getElementById("emailError").textContent = "Enter a valid email.";
+        valid = false;
+      }
+
+      if (valid) {
+        alert("Form submitted successfully!");
+        document.getElementById("contactForm").reset();
+      }
+    });
+  </script>
+
+</body>
+</html>
